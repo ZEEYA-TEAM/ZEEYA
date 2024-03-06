@@ -36,6 +36,10 @@ const People = () => {
     });
   };
 
+  const findPerson = (id) => {
+    return data[1].results.find(person => person.id === id).properties.Name.title[0]?.plain_text;
+  };
+
   if (!data || !Array.isArray(data)) {
     return <p aria-busy="true">Hämtar data</p>;
   }
@@ -60,7 +64,7 @@ const People = () => {
               return (
                 <tr key={index}>
                   <td>{formatDate(page.properties.Date?.date)}</td>
-                  <td>?</td>
+                  <td>{findPerson(page.properties.Person.relation[0]?.id) ?? 'No title'}</td>
                   <td>{page.properties.Hours.number ?? 0}</td>
                   <td>?</td>
                   <td>{page.properties.Note.title[0]?.text.content ?? <i>None</i>}</td>

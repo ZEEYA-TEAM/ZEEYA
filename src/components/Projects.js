@@ -47,7 +47,9 @@ const Projects = () => {
               <tr key={index}>
                 <td>{page.properties.Projectname.title[0]?.plain_text ?? 'Ingen titel'}</td>
                 <td>{page.properties.Status.select.name ?? 'Ingen status'}</td>
-                <td>{page.properties.Hours.number ?? '0'}</td>
+                <td>{page.properties.Hours.number ?? 0}</td>
+                <td>{page.properties.Worked_hours.rollup.number ?? 0}</td>
+                <td>{page.properties.Hours_left.formula.number ?? 0}</td>
               </tr>
             );
           })}

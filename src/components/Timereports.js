@@ -59,6 +59,10 @@ const People = () => {
             return (
               <tr key={index}>
                 <td>{formatDate(page.properties.Date?.date)}</td>
+                <td>?</td>
+                <td>{page.properties.Hours.number ?? 0}</td>
+                <td>?</td>
+                <td>{page.properties.Note.title[0]?.text.content ?? <i>None</i>}</td>
               </tr>
             );
           })}

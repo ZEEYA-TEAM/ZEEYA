@@ -40,6 +40,10 @@ const People = () => {
     return data[1].results.find(person => person.id === id).properties.Name.title[0]?.plain_text;
   };
 
+  const findProject = (id) => {
+    return data[0].results.find(project => project.id === id).properties.Projectname.title[0]?.plain_text;
+  };
+
   if (!data || !Array.isArray(data)) {
     return <p aria-busy="true">Hämtar data</p>;
   }
@@ -66,7 +70,7 @@ const People = () => {
                   <td>{formatDate(page.properties.Date?.date)}</td>
                   <td>{findPerson(page.properties.Person.relation[0]?.id) ?? 'No title'}</td>
                   <td>{page.properties.Hours.number ?? 0}</td>
-                  <td>?</td>
+                  <td>{findProject(page.properties.Project.relation[0]?.id)}</td>
                   <td>{page.properties.Note.title[0]?.text.content ?? <i>None</i>}</td>
                 </tr>
               );

@@ -23,6 +23,41 @@ const Projects = () => {
     fetchDataFromNotion();
   }, []);
 
+  // Funktion för att formatera datumet. och detta fick jag ändra lite
+  const formatTimespan = (dateProperty) => {
+    if (!dateProperty) {
+        return 'Inget datum angivet';
+    }
+
+    let dateStart, dateEnd, dateStartString, dateEndString;
+
+    if (!dateProperty.start) {
+      dateStartString = 'Inget datum angivet';
+    } else {
+      dateStart = new Date(dateProperty.start);
+
+      dateStartString = dateStart.toLocaleDateString('en', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+    }
+    
+    if (!dateProperty.end) {
+      dateEndString = 'Inget datum angivet';
+    } else {
+      dateEnd = new Date(dateProperty.end);
+
+      dateEndString = dateEnd.toLocaleDateString('en', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+    }
+
+    return dateStartString.concat(" -> ", dateEndString);
+  };
+
   if (!data || !Array.isArray(data)) {
     return <p aria-busy="true">Hämtar data</p>;
   }
@@ -39,6 +74,7 @@ const Projects = () => {
               <th>Hours</th>
               <th>Worked hours</th>
               <th>Hours left</th>
+              <th>Timespan</th>
             </tr>
           </thead>
           <tbody>
@@ -51,6 +87,7 @@ const Projects = () => {
                   <td>{page.properties.Hours.number ?? 0}</td>
                   <td>{page.properties.Worked_hours.rollup.number ?? 0}</td>
                   <td>{page.properties.Hours_left.formula.number ?? 0}</td>
+                  <td>{formatTimespan(page.properties.Timespan?.date)}</td>
                 </tr>
               );
             })}

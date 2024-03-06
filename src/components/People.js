@@ -30,25 +30,27 @@ const People = () => {
   return (
     <>
       <h1>People</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Total hours</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data[1].results.map((page, index) => {
-            // Rendera en rad i tabellen för varje objekt i 'data.results'.
-            return (
-              <tr key={index}>
-                <td>{page.properties.Name.title[0]?.plain_text ?? 'Ingen titel'}</td>
-                <td>{page.properties.Total_hours.rollup.array[0]?.number ?? 0}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className='overflow-auto'>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Total hours</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data[1].results.map((page, index) => {
+              // Rendera en rad i tabellen för varje objekt i 'data.results'.
+              return (
+                <tr key={index}>
+                  <td>{page.properties.Name.title[0]?.plain_text ?? 'Ingen titel'}</td>
+                  <td>{page.properties.Total_hours.rollup.array[0]?.number ?? 0}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

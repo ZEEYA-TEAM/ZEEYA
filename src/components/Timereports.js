@@ -43,31 +43,33 @@ const People = () => {
   return (
     <>
       <h1>Timereports</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Person</th>
-            <th>Hours</th>
-            <th>Project</th>
-            <th>Note</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data[2].results.map((page, index) => {
-            // Rendera en rad i tabellen för varje objekt i 'data.results'.
-            return (
-              <tr key={index}>
-                <td>{formatDate(page.properties.Date?.date)}</td>
-                <td>?</td>
-                <td>{page.properties.Hours.number ?? 0}</td>
-                <td>?</td>
-                <td>{page.properties.Note.title[0]?.text.content ?? <i>None</i>}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className='overflow-auto'>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Person</th>
+              <th>Hours</th>
+              <th>Project</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data[2].results.map((page, index) => {
+              // Rendera en rad i tabellen för varje objekt i 'data.results'.
+              return (
+                <tr key={index}>
+                  <td>{formatDate(page.properties.Date?.date)}</td>
+                  <td>?</td>
+                  <td>{page.properties.Hours.number ?? 0}</td>
+                  <td>?</td>
+                  <td>{page.properties.Note.title[0]?.text.content ?? <i>None</i>}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

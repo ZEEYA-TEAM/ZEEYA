@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-function Login(){
-    const [firstName, setFirstName] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+function Login() {
+  const [firstName, setFirstName] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
     if (firstName.trim() !== "") {
       setIsLoggedIn(true);
     }
-};
-    return(
-        <div>
-            {isLoggedIn ? (
+  };
+
+  return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      {isLoggedIn ? (
         <p>Välkommen, {firstName}!</p>
       ) : (
         <form>
@@ -28,7 +30,8 @@ function Login(){
           </button>
         </form>
       )}
-        </div>
-    )
+    </div>
+  );
 }
+
 export default Login;

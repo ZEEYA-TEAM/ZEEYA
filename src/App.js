@@ -1,13 +1,9 @@
-import Projects from './components/Projects';
-import People from './components/People';
-import Timereports from './components/Timereports';
+import Login from "./components/Login";
 
 function App() {
   return (
     <>
-        <Projects />
-        <People />
-        <Timereports />
+      <Login />
     </>
   );
 }

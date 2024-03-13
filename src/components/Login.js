@@ -9,7 +9,6 @@ function Login() {
       setIsLoggedIn(true);
     }
   };
-
   return (
     <div>
       <nav >
@@ -28,7 +27,7 @@ function Login() {
         ) : (
           <form>
             <label>
-              Förnamn:
+              FirstName:
               <input
                 type="text"
                 value={firstName}

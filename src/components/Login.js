@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Layout from "./Layout";
 
 function Login() {
   const [firstName, setFirstName] = useState("");
@@ -13,7 +14,10 @@ function Login() {
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
       {isLoggedIn ? (
-        <p>Välkommen, {firstName}!</p>
+        <div>
+        <p style={{fontSize:"2em"}}>Välkommen, {firstName}!</p>
+        <Layout />
+        </div>
       ) : (
         <form>
           <label>

@@ -1,11 +1,16 @@
-import Login from "./components/Login";
+import Login from './components/Login';
+import Navbar from './components/Navbar';
 
-function App() {
-  return (
+function App(){
+  return(
     <>
-      <Login />
+        <Navbar />
+        <Login />       
     </>
   );
 }
 
 export default App;
+
+
+

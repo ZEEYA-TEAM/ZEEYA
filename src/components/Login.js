@@ -16,13 +16,13 @@ function Login() {
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh"}}>
           {isLoggedIn ? (
            <div>
-           <p style={{fontSize:"2em"}}>Välkommen, {firstName}!</p>
+           <p style={{fontSize:"2em"}}>Welcome, {firstName}!</p>
            <Layout />
            </div>
           ) : (            
             <form>
               <label>
-                Förnamn:
+                First Name:
                 <input
                   type="text"
                   value={firstName}

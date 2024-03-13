@@ -10,7 +10,6 @@ function Login() {
       setIsLoggedIn(true);
     }
   };
-
   return (
     <>
       <div>

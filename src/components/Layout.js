@@ -26,9 +26,9 @@ const Layout = () => {
   return (
     <>
       <nav style={{display:"grid", width:"auto",fontSize:"1.2em"}}>
-        <label htmlFor="componentDropdown" style={{fontSize:""}}>Välj från listan nedan för att se rapporter:</label>
+        <label htmlFor="componentDropdown" style={{fontSize:""}}>Choose from dropdown list to see reports:</label>
         <select id="componentDropdown" onChange={handleSelectChange}>
-          <option value="">Välj..</option>
+          <option value="">Choose..</option>
           <option value="projects">Projects</option>
           <option value="people">People</option>
           <option value="timereports">Timereports</option>

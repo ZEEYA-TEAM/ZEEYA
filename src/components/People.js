@@ -6,7 +6,7 @@ const People = () => {
 
   const fetchDataFromNotion = () => {
     const payload = {
-
+     
     };
 
     axios.post('http://localhost:3001/api/notion', payload)
@@ -19,7 +19,39 @@ const People = () => {
       });
   };
 
+  const sendDataToNotion = () => {
+    const payload = {
+      parent: {
+        type: "database_id",
+        database_id: "b86de2e54b4c4e7789b07dc308489e4d"
+      },
+      properties: {
+        'Name': {
+          type: 'title',
+          title: [
+            {
+              type: 'text',
+              text: {
+                content: 'Reidar',
+              },
+            },
+          ],
+        },
+      },
+    };
+
+    axios.post('http://localhost:3001/api/notion/send', payload)
+      .then(response => {
+        setData(response.data);
+        console.log('Data skickad: ', response.data);
+      })
+      .catch(error => {
+        console.error('Fel vid skickning av data till notion: ', error);
+      });
+  }
+
   useEffect(() => {
+    sendDataToNotion();
     fetchDataFromNotion();
   }, []);
 

@@ -9,7 +9,7 @@ function AddDateProjects(){
     };
     return(
         <form onSubmit={handelSubmit}>
-            <input type="projects" value={projects}>DateChange</input>
+            <input type="projects" value={projects}>{DateChange}</input>
             <button type="submit">Download projects</button>
 
         </form>

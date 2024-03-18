@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Projects from './Projects';
 import People from './People';
 import Timereports from './Timereports';
+import FilterProjects from './ActiveProjects';
+import AddPersonForm from './AddPersonFrom';
 
 const Layout = () => {
   const [userChoice, setuserChoice] = useState(null);
@@ -18,6 +20,10 @@ const Layout = () => {
         return <People />;
       case 'timereports':
         return <Timereports />;
+      case 'filterprojects':
+        return <FilterProjects/>
+      case 'addpeople':
+        return <AddPersonForm/>
       default:
         return null;
     }
@@ -32,6 +38,8 @@ const Layout = () => {
           <option value="projects">Projects</option>
           <option value="people">People</option>
           <option value="timereports">Timereports</option>
+          <option value="filterprojects">Filter Projects</option>
+          <option value="addpeople">Add people</option>
         </select>
       </nav>
 

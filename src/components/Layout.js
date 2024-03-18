@@ -32,7 +32,7 @@ const Layout = () => {
   return (
     <>
       <nav style={{display:"grid", width:"auto",fontSize:"1.2em"}}>
-        <label htmlFor="componentDropdown" style={{fontSize:""}}>Choose from dropdown list to see reports:</label>
+        <label htmlFor="componentDropdown" style={{fontSize:""}}>Choose function from dropdown list:</label>
         <select id="componentDropdown" onChange={handleSelectChange}>
           <option value="">Choose..</option>
           <option value="projects">Projects</option>

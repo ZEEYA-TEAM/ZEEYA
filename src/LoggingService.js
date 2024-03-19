@@ -2,6 +2,9 @@ import axios from "axios";
 
 class LoggingService {
     static logUserAction(userId, actionType, component, metadata) {
+
+        const now = Date.now();
+
         const payload = {
             parent: {
               type: "database_id",
@@ -51,6 +54,12 @@ class LoggingService {
                     },
                   },
                 ],
+              },
+              'Date': {
+                type: 'date',
+                date: {
+                  start: new Date(now).toISOString()
+                },
               },
             },
         };

@@ -5,7 +5,7 @@ function Navbar() {
         <>
             <nav>
                 <ul>
-                    <li><strong>ZEEYA</strong></li>
+                    <li><strong>ZEEYA TEAM</strong></li>
                 </ul>
                 <ul>
                     <li><a href="#">Home</a></li>

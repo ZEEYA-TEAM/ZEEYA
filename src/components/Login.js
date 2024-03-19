@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Layout from "./Layout";
+import LoggingService from "../LoggingService";
 
 function Login() {
   const [firstName, setFirstName] = useState("");
@@ -7,6 +8,7 @@ function Login() {
 
   const handleLogin = () => {
     if (firstName.trim() !== "") {
+      LoggingService.logUserAction(firstName, 'button_click', 'Login', 'Login-button');
       setIsLoggedIn(true);
     }
   };

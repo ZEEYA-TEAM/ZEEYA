@@ -38,3 +38,5 @@ export async function sendPerson(name, role) {
         console.error('Fel vid skickning av data till notion: ', error);            
     }
 };
+
+

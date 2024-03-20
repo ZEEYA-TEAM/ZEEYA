@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { fetchData } from '../resources/FetchData';
 
-const People = () => {
+function People() {
   const [data, setData] = useState(null);
 
   async function fetchPeople() {
@@ -51,4 +50,4 @@ const People = () => {
 }
 
 
-export default People
+export default People;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchData } from '../resources/FetchData';
 
-const Timereports = () => {
+function Timereports() {
   const [data, setData] = useState(null);
   const [people, setPeople] = useState(null);
   const [projects, setProjects] = useState(null);

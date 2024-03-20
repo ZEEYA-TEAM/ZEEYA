@@ -1,61 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { fetchData } from '../resources/FetchData';
 
 const People = () => {
   const [data, setData] = useState(null);
 
-  const fetchDataFromNotion = () => {
-    const payload = {
-     
-    };
-
-    axios.post('http://localhost:3001/api/notion', payload)
-      .then(response => {
-        setData(response.data);
-        console.log('Data hämtad från notion:', response.data);
-      })
-      .catch(error => {
-        console.error('Fel vi inhämtning från notion: ', error);
-      });
-  };
-
-  const sendDataToNotion = () => {
-    const payload = {
-      parent: {
-        type: "database_id",
-        database_id: "b86de2e54b4c4e7789b07dc308489e4d"
-      },
-      properties: {
-        'Name': {
-          type: 'title',
-          title: [
-            {
-              type: 'text',
-              text: {
-                content: 'Reidar',
-              },
-            },
-          ],
-        },
-      },
-    };
-
-    axios.post('http://localhost:3001/api/notion/send', payload)
-      .then(response => {
-        setData(response.data);
-        console.log('Data skickad: ', response.data);
-      })
-      .catch(error => {
-        console.error('Fel vid skickning av data till notion: ', error);
-      });
+  async function fetchPeople() {
+    try {
+      const people = await fetchData("people");
+      setData(people);
+    } catch (error) {
+      console.error("Failed to fetch people: ", error);
+    }
   }
 
   useEffect(() => {
-    sendDataToNotion();
-    fetchDataFromNotion();
+    fetchPeople();
   }, []);
 
-  if (!data || !Array.isArray(data)) {
+  if (!data) {
     return <p aria-busy="true">Hämtar data</p>;
   }
 
@@ -71,7 +34,7 @@ const People = () => {
             </tr>
           </thead>
           <tbody>
-            {data[1].results.map((page, index) => {
+            {data.results.map((page, index) => {
               // Rendera en rad i tabellen för varje objekt i 'data.results'.
               return (
                 <tr key={index}>

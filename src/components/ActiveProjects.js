@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchData } from '../resources/FetchData';
+import axios from 'axios';
 
 const FilterProjects = () => {
   const [data, setData] = useState(null);
@@ -7,32 +7,35 @@ const FilterProjects = () => {
   const [filter, setFilter] = useState('');
   const [allProjectNames, setAllProjectNames] = useState([]);
 
-  async function fetchProjects() {
-    try {
-      const response = await fetchData("projects");
-      console.log('Data hämtad från notion:', response.data);
-      setData(response);
-    } catch (error) {
-      console.error('Fel vi inhämtning från notion: ', error);
-    }
-  }
+  const fetchDataFromNotion = () => {
+    const payload = {};
+
+    axios.post('http://localhost:3001/api/notion', payload)
+      .then(response => {
+        setData(response.data);
+        console.log('Data hämtad från notion:', response.data);
+      })
+      .catch(error => {
+        console.error('Fel vi inhämtning från notion: ', error);
+      });
+  };
 
   useEffect(() => {
-    fetchProjects();
+    fetchDataFromNotion();
   }, []);
 
   useEffect(() => {
     if (data) {
-      const names = data.results.map(page => page.properties.Projectname.title[0]?.plain_text);
+      const names = data[0].results.map(page => page.properties.Projectname.title[0]?.plain_text);
       setAllProjectNames(names);
       setFilteredData(filterData(data, filter));
     }
   }, [data, filter]);
 
   const filterData = (data, filter) => {
-      if (!filter) return data.results;
+    if (!filter) return data[0].results;
 
-      const filtered = data.results.filter(page => {
+    const filtered = data[0].results.filter(page => {
       const projectName = page.properties.Projectname.title[0]?.plain_text.toLowerCase();
       const status = page.properties.Status.select.name.toLowerCase();
 

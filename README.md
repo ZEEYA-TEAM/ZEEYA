@@ -2,6 +2,7 @@
 
 This Node.js project creates a secure and efficient web server with user authentication and data management capabilities, leveraging the Express framework and the Notion API. It incorporates various security measures and optimizations to ensure a robust web application.
 
+
 ## Key Features
 
 - **Security Measures**: Implements Helmet, rate limiting, and data sanitization to protect against common web vulnerabilities such as XSS, NoSQL injection, and DoS attacks.
@@ -27,3 +28,7 @@ Set up environment variables for the Notion API base URL (`NOTION_API_BASE_URL`)
 4. Start the server with `node server.js`.
 
 This project is a starting point for building secure and efficient web applications with user authentication capabilities, emphasizing the importance of security and performance in web development.
+=======
+Därefter kan utvecklingsservern startas med:
+`npm start`
+

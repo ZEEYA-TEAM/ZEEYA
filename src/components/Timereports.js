@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { fetchData } from '../resources/FetchData';
+import axios from 'axios';
 
-function Timereports() {
+const People = () => {
   const [data, setData] = useState(null);
-  const [people, setPeople] = useState(null);
-  const [projects, setProjects] = useState(null);
 
-  async function fetchTimereports() {
-    try {
-      const response = await fetchData("timereports");
-      const people = await fetchData("people");
-      const projects = await fetchData("projects");
+  const fetchDataFromNotion = () => {
+    const payload = {
 
-      setData(response);
-      setPeople(people);
-      setProjects(projects);
-    } catch (error) {
-      console.error(error);
-    }
+    };
+
+    axios.post('http://localhost:3001/api/notion', payload)
+      .then(response => {
+        setData(response.data);
+        console.log('Data hämtad från notion:', response.data);
+      })
+      .catch(error => {
+        console.error('Fel vi inhämtning från notion: ', error);
+      });
   };
 
   useEffect(() => {
-    fetchTimereports();
+    fetchDataFromNotion();
   }, []);
 
   // Funktion för att formatera datumet. och detta fick jag ändra lite
@@ -38,14 +37,14 @@ function Timereports() {
   };
 
   const findPerson = (id) => {
-    return people.results.find(person => person.id === id).properties.Name.title[0]?.plain_text;
+    return data[1].results.find(person => person.id === id).properties.Name.title[0]?.plain_text;
   };
 
   const findProject = (id) => {
-    return projects.results.find(project => project.id === id).properties.Projectname.title[0]?.plain_text;
+    return data[0].results.find(project => project.id === id).properties.Projectname.title[0]?.plain_text;
   };
 
-  if (!data) {
+  if (!data || !Array.isArray(data)) {
     return <p aria-busy="true">Hämtar data</p>;
   }
 
@@ -64,7 +63,7 @@ function Timereports() {
             </tr>
           </thead>
           <tbody>
-            {data.results.map((page, index) => {
+            {data[2].results.map((page, index) => {
               // Rendera en rad i tabellen för varje objekt i 'data.results'.
               return (
                 <tr key={index}>
@@ -84,4 +83,4 @@ function Timereports() {
 }
 
 
-export default Timereports;
+export default People

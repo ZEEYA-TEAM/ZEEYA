@@ -1,23 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { fetchData } from '../resources/FetchData';
+import axios from 'axios';
 
-function People() {
+const People = () => {
   const [data, setData] = useState(null);
 
-  async function fetchPeople() {
-    try {
-      const people = await fetchData("people");
-      setData(people);
-    } catch (error) {
-      console.error("Failed to fetch people: ", error);
-    }
+  const fetchDataFromNotion = () => {
+    const payload = {
+     
+    };
+
+    axios.post('http://localhost:3001/api/notion', payload)
+      .then(response => {
+        setData(response.data);
+        console.log('Data hämtad från notion:', response.data);
+      })
+      .catch(error => {
+        console.error('Fel vi inhämtning från notion: ', error);
+      });
+  };
+
+  const sendDataToNotion = () => {
+    const payload = {
+      parent: {
+        type: "database_id",
+        database_id: "b86de2e54b4c4e7789b07dc308489e4d"
+      },
+      properties: {
+        'Name': {
+          type: 'title',
+          title: [
+            {
+              type: 'text',
+              text: {
+                content: 'Reidar',
+              },
+            },
+          ],
+        },
+      },
+    };
+
+    axios.post('http://localhost:3001/api/notion/send', payload)
+      .then(response => {
+        setData(response.data);
+        console.log('Data skickad: ', response.data);
+      })
+      .catch(error => {
+        console.error('Fel vid skickning av data till notion: ', error);
+      });
   }
 
   useEffect(() => {
-    fetchPeople();
+    sendDataToNotion();
+    fetchDataFromNotion();
   }, []);
 
-  if (!data) {
+  if (!data || !Array.isArray(data)) {
     return <p aria-busy="true">Hämtar data</p>;
   }
 
@@ -33,7 +71,7 @@ function People() {
             </tr>
           </thead>
           <tbody>
-            {data.results.map((page, index) => {
+            {data[1].results.map((page, index) => {
               // Rendera en rad i tabellen för varje objekt i 'data.results'.
               return (
                 <tr key={index}>
@@ -50,4 +88,4 @@ function People() {
 }
 
 
-export default People;
+export default People

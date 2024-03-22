@@ -1,27 +1,18 @@
-import React, { useRef, useEffect } from "react";
-import Login from './components/Login';
-import Navbar from './components/Navbar';
-import People from "./components/People";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom"; // استيراد BrowserRouter
+import Login from "./components/Login";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const mainRef = useRef();
-  useEffect(() => {
-    const setMinHeight = () => {
-      if (!mainRef.current) return;
-      mainRef.current.style.minHeight = `${window.innerHeight}px`;
-    };
-    setMinHeight();
-    window.addEventListener("resize", setMinHeight);
-    return () => {
-      window.removeEventListener("resize", setMinHeight);
-    };
-  }, []);
-
   return (
-    <>
-      <Navbar />
-      <Login />    
-    </>
+    <Router>
+      {" "}
+      {/* استخدام BrowserRouter هنا */}
+      <>
+        <Navbar />
+        <Login />
+      </>
+    </Router>
   );
 }
 

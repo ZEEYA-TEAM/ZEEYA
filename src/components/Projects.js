@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { fetchData } from '../resources/FetchData';
+import axios from 'axios';
 
-function Projects() {
+const Projects = () => {
   const [data, setData] = useState(null);
 
-  async function fetchProjects() {
-    try {
-      const response = await fetchData("projects"); 
-      setData(response);
-    } catch (error) {
-      console.error(error);
-    }
+  const fetchDataFromNotion = () => {
+    const payload = {
+
+    };
+
+    axios.post('http://localhost:3001/api/notion', payload)
+      .then(response => {
+        setData(response.data);
+        console.log('Data hämtad från notion:', response.data);
+      })
+      .catch(error => {
+        console.error('Fel vi inhämtning från notion: ', error);
+      });
   };
 
   useEffect(() => {
-    fetchProjects();
+    fetchDataFromNotion();
   }, []);
 
   // Funktion för att formatera datumet. och detta fick jag ändra lite
@@ -52,7 +58,7 @@ function Projects() {
     return dateStartString.concat(" -> ", dateEndString);
   };
 
-  if (!data) {
+  if (!data || !Array.isArray(data)) {
     return <p aria-busy="true">Hämtar data</p>;
   }
 
@@ -72,7 +78,7 @@ function Projects() {
             </tr>
           </thead>
           <tbody>
-            {data.results.map((page, index) => {
+            {data[0].results.map((page, index) => {
               // Rendera en rad i tabellen för varje objekt i 'data.results'.
               return (
                 <tr key={index}>
@@ -92,4 +98,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default Projects

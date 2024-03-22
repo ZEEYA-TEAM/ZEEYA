@@ -5,7 +5,7 @@ const FilterProjects = () => {
   const [data, setData] = useState(null);
   const [filteredData, setFilteredData] = useState(null);
   const [filter, setFilter] = useState('');
-  const [allProjectNames, setAllProjectNames] = useState([]);
+  const [allProjectStatuses, setAllProjectStatuses] = useState([]);
 
   async function fetchProjects() {
     try {
@@ -23,20 +23,18 @@ const FilterProjects = () => {
 
   useEffect(() => {
     if (data) {
-      const names = data.results.map(page => page.properties.Projectname.title[0]?.plain_text);
-      setAllProjectNames(names);
+      const statuses = data.results.map(page => page.properties.Status.select.name);
+      setAllProjectStatuses(statuses);
       setFilteredData(filterData(data, filter));
     }
   }, [data, filter]);
 
   const filterData = (data, filter) => {
-      if (!filter) return data.results;
+    if (!filter) return data.results;
 
-      const filtered = data.results.filter(page => {
-      const projectName = page.properties.Projectname.title[0]?.plain_text.toLowerCase();
+    const filtered = data.results.filter(page => {
       const status = page.properties.Status.select.name.toLowerCase();
-
-      return projectName.includes(filter.toLowerCase()) || status.includes(filter.toLowerCase());
+      return status === filter.toLowerCase();
     });
 
     return filtered;
@@ -46,8 +44,7 @@ const FilterProjects = () => {
     setFilter(event.target.value);
   };
 
-  const formatTimespan = (dateProperty) => {
-    // Your existing formatTimespan function
+  const formatTimespan = (dateProperty) => {   
   };
 
   if (!filteredData || !Array.isArray(filteredData)) {
@@ -58,11 +55,11 @@ const FilterProjects = () => {
     <>
       <h1>Projects</h1>      
       <div>
-        <label htmlFor="project">Select to see active project:</label>
-        <select id="project" value={filter} onChange={handleChangeFilter}>
-          <option value="">All projects</option>
-          {allProjectNames.map((name, index) => (
-            <option key={index} value={name}>{name}</option>
+        <label htmlFor="status">Select from dropdown list to see project status:</label>
+        <select id="status" value={filter} onChange={handleChangeFilter}>
+          <option value="">Project status</option>
+          {allProjectStatuses.map((status, index) => (
+            <option key={index} value={status}>{status}</option>
           ))}
         </select>
       </div>

@@ -16,13 +16,13 @@ function Login() {
   };
   return (
     <>
-      <main>
-        {isLoggedIn ? (
-          <div>
-          <p style={{fontSize:"2em"}}>Welcome, {firstName}!</p>
-          <Layout />
-          </div>
-        ) : (
+      {isLoggedIn ? (
+        <div>
+        <p style={{fontSize:"2em"}}>Welcome, {firstName}!</p>
+        <Layout />
+        </div>
+      ) : (
+        <div className="login">
           <form onSubmit={handleLogin}>
             <input
               type="text"
@@ -38,8 +38,8 @@ function Login() {
               Logga in
             </button>
           </form>
-        )}
-      </main>
+        </div>
+      )}
     </>
   );
 }

@@ -29,6 +29,7 @@ function Timereports() {
     if (!dateProperty || !dateProperty.start) {
         return 'Inget datum angivet';
     }
+
     const date = new Date(dateProperty.start);
     return date.toLocaleDateString('en', {
         year: 'numeric',

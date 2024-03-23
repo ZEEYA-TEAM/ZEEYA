@@ -1,14 +1,14 @@
 /* Navbar.css */
 
-.navbar-brand {
-    font-size: 1.5rem;
-}
+// .navbar-brand {
+//     font-size: 1.5rem;
+// }
   
 .navbar-toggle {
     display: none;
-    background: none;
-    border: none;
-    color: #fff;
+}
+
+.navbar-toggle button {
     font-size: 1rem;
     cursor: pointer;
 }

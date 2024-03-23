@@ -14,9 +14,11 @@ function Navbar() {
                 <ul className="navbar-brand">
                     <li><strong>ZEEYA TEAM</strong></li>
                 </ul>
-                <button className="navbar-toggle" onClick={toggleMenu}>
-                    Menu
-                </button>
+                <ul className="navbar-toggle">
+                    <button onClick={toggleMenu}>
+                        &#9776;
+                    </button>
+                </ul>
                 <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
                     <li><a href="/">Home</a></li>
                     <li><a href="/">About</a></li>

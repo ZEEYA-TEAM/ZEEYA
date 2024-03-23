@@ -1,0 +1,44 @@
+/* Navbar.css */
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+  
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+    
+.navbar-menu a {
+    color: #fff;
+    text-decoration: none;
+}
+  
+@media (max-width: 768px) {
+    .navbar-toggle {
+      display: block;
+    }
+    .navbar-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      height: calc(100vh - 100px);
+      background-color: #13171f;
+      font-size: 1.6rem;
+    }
+
+    .navbar-menu.active {
+      display: flex;
+    }
+
+    .navbar-menu li {
+        padding: 1em;
+    }
+}  

@@ -31,7 +31,6 @@ const Layout = () => {
 
   return (
     <>
-      <nav style={{display:"grid", width:"auto",fontSize:"1.2em"}}>
         <label htmlFor="componentDropdown" style={{fontSize:""}}>Choose function from dropdown list:</label>
         <select id="componentDropdown" onChange={handleSelectChange}>
           <option value="">Choose..</option>
@@ -41,8 +40,6 @@ const Layout = () => {
           <option value="filterprojects">Filter Projects</option>
           <option value="addpeople">Add people</option>
         </select>
-      </nav>
-
       {renderUserChoice()}
     </>
   );

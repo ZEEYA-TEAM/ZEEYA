@@ -5,5 +5,3 @@ För att installera node dependencies kör:
 
 Därefter kan utvecklingsservern startas med:
 `npm start`
-
-test

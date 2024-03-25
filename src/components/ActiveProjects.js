@@ -57,7 +57,7 @@ const FilterProjects = () => {
       <div>
         <label htmlFor="status">Select from dropdown list to see project status:</label>
         <select id="status" value={filter} onChange={handleChangeFilter}>
-          <option value="">Project status</option>
+          <option value="">Choose status</option>
           {allProjectStatuses.map((status, index) => (
             <option key={index} value={status}>{status}</option>
           ))}

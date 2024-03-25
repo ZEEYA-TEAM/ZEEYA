@@ -4,6 +4,7 @@ import People from './People';
 import Timereports from './Timereports';
 import FilterProjects from './ActiveProjects';
 import AddPersonForm from './AddPersonFrom';
+import UpdateProject from './UpdateProject';
 
 const Layout = () => {
   const [userChoice, setuserChoice] = useState(null);
@@ -24,6 +25,8 @@ const Layout = () => {
         return <FilterProjects/>
       case 'addpeople':
         return <AddPersonForm/>
+      case 'updateproject':
+        return <UpdateProject />
       default:
         return null;
     }
@@ -39,6 +42,7 @@ const Layout = () => {
           <option value="timereports">Timereports</option>
           <option value="filterprojects">Filter Projects</option>
           <option value="addpeople">Add people</option>
+          <option value="updateproject">Update Project</option>
         </select>
       {renderUserChoice()}
     </>

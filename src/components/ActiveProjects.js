@@ -44,8 +44,7 @@ const FilterProjects = () => {
     setFilter(event.target.value);
   };
 
-  const formatTimespan = (dateProperty) => {
-    // Your existing formatTimespan function
+  const formatTimespan = (dateProperty) => {   
   };
 
   if (!filteredData || !Array.isArray(filteredData)) {

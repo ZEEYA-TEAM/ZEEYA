@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { sendPerson } from "../resources/SendData";
+import LoggingService from "../LoggingService";
 
 function AddPersonForm() {
   const [name, setName] = useState("");
@@ -10,6 +11,8 @@ function AddPersonForm() {
      // Förhindra standardbeteendet för händelsen, vilket i detta fall förhindrar att sidan omladdas när formuläret skickas in
     event.preventDefault();
      // Skapa en ny variabel newPerson som innehåller ett objekt med egenskaperna name och role
+    LoggingService.logUserAction('unknown', 'button_click', 'AddPersonFrom', 'Add-Person-Button');
+
     const newPerson = {
       name: name, //Hämta värdet från variabeln name och tilldela det till egenskapen name i newPerson
       role: role //Hämta värdet från variabeln role och tilldela det till egenskapen role i newPerson

@@ -1,8 +1,6 @@
 import React from "react";
 import Login from './components/Login';
 import Navbar from './components/Navbar';
-import ViewReport from "./components/ViewReports";
-import ViewReport from "./components/ViewReports";
 
 function App() {
 
@@ -11,7 +9,6 @@ function App() {
       <div className="page">
         <Navbar />
         <Login />
-        <ViewReport/>
       </div>
     </>
   );

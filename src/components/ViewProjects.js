@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchData } from '../resources/FetchData';
 
-function Projects() {
+function ViewProjects() {
   const [data, setData] = useState(null);
 
   async function fetchProjects() {
@@ -92,4 +92,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default ViewProjects;

@@ -46,7 +46,7 @@ function Timereports() {
     return projects.results.find(project => project.id === id).properties.Projectname.title[0]?.plain_text;
   };
 
-  if (!data) {
+  if (!data || !people || !projects) {
     return <p aria-busy="true">Hämtar data</p>;
   }
 

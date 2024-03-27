@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { sendProject } from "../resources/SendData";
+import LoggingService from "../LoggingService";
 
 function AddProject() {
   const [projectName, setProjectName] = useState("");
@@ -33,6 +34,8 @@ function AddProject() {
     } catch (error) {
       console.error("Fel vid sparande av data i Notion:", error);
     }
+
+    LoggingService.logUserAction('unknown', 'button_click', 'AddProject', 'Add-Project-Button');
   };
 
   return (

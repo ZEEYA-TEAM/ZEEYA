@@ -1,0 +1,13 @@
+@use "sass:map";
+@use "@picocss/pico/scss/pico" as *;
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  max-width: map.get(map.get($breakpoints, "sm"), "viewport");
+  margin: 0 auto;
+}
+

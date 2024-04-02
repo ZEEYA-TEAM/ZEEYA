@@ -1,26 +1,31 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
 import './../resources/login.scss'
+import WithAuthentication from "./WithAuthentication";
 
-function Login() {
+function Login({ isLoggedIn, setIsLoggedIn }) {
   const [notionname, setUsername] = useState("");
   const [password, setPassword] = useState("");
   // Initially, user is not known (null). We'll find out after checking localStorage.
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Attempt to retrieve user info from localStorage
-    const userName = localStorage.getItem("UserName");
-    const userId = localStorage.getItem("PrivateId");
- 
-    if (userName && userId) {
-      // If both userName and userId are found in localStorage, update the user state
-      setUser({ name: userName, id: userId });
+    if (isLoggedIn) {
+      // Redirect or perform action when user is already logged in
+      console.log("User is already logged in");
+
+      const userName = localStorage.getItem("UserName");
+      const userId = localStorage.getItem("PrivateId");
+   
+      if (userName && userId) {
+        // If both userName and userId are found in localStorage, update the user state
+        setUser({ name: userName, id: userId });
+      }
     }
- 
-  }, []);
+  }, [isLoggedIn]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
+
     try {
       const response = await fetch("http://localhost:3001/login", {
  
@@ -38,6 +43,9 @@ function Login() {
         localStorage.setItem("UserName", data.user);
         localStorage.setItem("PrivateId", data.userid);
         setUser({ name: data.user, id: data.userid });
+        
+        setIsLoggedIn(!isLoggedIn);
+        console.log("Login ok", isLoggedIn);
  
       } else {
         alert("Login failed");
@@ -49,16 +57,20 @@ function Login() {
   };
  
   const handleLogout = () => {
+    setIsLoggedIn(!isLoggedIn);
     // Clear user info from localStorage
     localStorage.removeItem("UserName");
     localStorage.removeItem("PrivateId");
     // Reset user state to null
     setUser(null);
+
+    console.log("Logout ok", isLoggedIn);
   };
   return (
  
     <main>
-      {user ? (
+       <h1>{isLoggedIn ? "True" : "False"}</h1>
+      {isLoggedIn ? (
         // Show user info if user state is set
         <>
           <div>
@@ -100,4 +112,4 @@ function Login() {
     </main>
   );
 }
-export default Login;
+export default WithAuthentication(Login);

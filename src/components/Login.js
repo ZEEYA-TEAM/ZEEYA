@@ -1,5 +1,7 @@
-
 import React, { useState, useEffect } from "react";
+
+import Navbar from "./Navbar";
+
 function Login() {
   const [notionname, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -58,31 +60,45 @@ function Login() {
     <div>
       {user ? (
         // Show user info if user state is set
-        <div>
-          <h2>Welcome, {user.name}</h2>
- 
-          <p>Your User ID: {user.id}</p>
- 
-          <button onClick={handleLogout}>Logout</button> {/* Logout button */}
-        </div>
+        <>
+          <Navbar />
+          <div>
+            <h2>Welcome, {user.name}</h2>
+  
+            <p>Your User ID: {user.id}</p>
+  
+            <button onClick={handleLogout}>Logout</button> {/* Logout button */}
+          </div>
+        </>
       ) : (
-        // Otherwise, show the login form
-        <form onSubmit={handleLogin}>
- 
-          <input
-            type="text"
-            value={notionname}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-          <button type="submit">Login</button>
-        </form>
+        <>
+          <nav>            
+            <ul className="navbar-brand">
+              <li><strong>ZEEYA TEAM</strong></li>
+            </ul>          
+            <ul className="navbar-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/">About</a></li>
+            </ul>
+          </nav>
+          {/* Otherwise, show the login form */}
+          <form onSubmit={handleLogin}>
+
+            <input
+              type="text"
+              value={notionname}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <button type="submit">Login</button>
+          </form>
+        </>
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-
 import Navbar from "./Navbar";
+import './../resources/login.scss'
 
 function Login() {
   const [notionname, setUsername] = useState("");
@@ -57,7 +57,7 @@ function Login() {
   };
   return (
  
-    <div>
+    <main>
       {user ? (
         // Show user info if user state is set
         <>
@@ -82,25 +82,32 @@ function Login() {
             </ul>
           </nav>
           {/* Otherwise, show the login form */}
-          <form onSubmit={handleLogin}>
-
+          <form className="login-form" onSubmit={handleLogin}>
             <input
               type="text"
+              name="login"
+              placeholder="Username"
+              aria-label="Login"
+              autoComplete="username"
+              required
               value={notionname}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
             />
             <input
-              type="password"
+              type="text"
+              name="login"
+              placeholder="Password"
+              aria-label="Login"
+              autoComplete="username"
+              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
             />
             <button type="submit">Login</button>
           </form>
         </>
       )}
-    </div>
+    </main>
   );
 }
 export default Login;

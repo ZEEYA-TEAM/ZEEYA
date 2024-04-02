@@ -61,7 +61,6 @@ function Login() {
       {user ? (
         // Show user info if user state is set
         <>
-          <Navbar />
           <div>
             <h2>Welcome, {user.name}</h2>
   
@@ -72,15 +71,6 @@ function Login() {
         </>
       ) : (
         <>
-          <nav>            
-            <ul className="navbar-brand">
-              <li><strong>ZEEYA TEAM</strong></li>
-            </ul>          
-            <ul className="navbar-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/">About</a></li>
-            </ul>
-          </nav>
           {/* Otherwise, show the login form */}
           <form className="login-form" onSubmit={handleLogin}>
             <input
@@ -94,7 +84,7 @@ function Login() {
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
-              type="text"
+              type="password"
               name="login"
               placeholder="Password"
               aria-label="Login"

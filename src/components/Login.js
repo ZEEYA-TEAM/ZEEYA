@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './../resources/login.scss'
-import WithAuthentication from "./WithAuthentication";
+import { useAuth } from "../resources/AuthContext";
 
-function Login({ isLoggedIn, setIsLoggedIn }) {
+function Login() {
   const [notionname, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // Initially, user is not known (null). We'll find out after checking localStorage.
   const [user, setUser] = useState(null);
+  const { isLoggedIn, login, logout } = useAuth();
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -43,8 +44,10 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
         localStorage.setItem("UserName", data.user);
         localStorage.setItem("PrivateId", data.userid);
         setUser({ name: data.user, id: data.userid });
-        
-        setIsLoggedIn(!isLoggedIn);
+     
+        login();
+        setUsername("");
+        setPassword("");
         console.log("Login ok", isLoggedIn);
  
       } else {
@@ -57,7 +60,7 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
   };
  
   const handleLogout = () => {
-    setIsLoggedIn(!isLoggedIn);
+    //setIsLoggedIn(!isLoggedIn);
     // Clear user info from localStorage
     localStorage.removeItem("UserName");
     localStorage.removeItem("PrivateId");
@@ -69,7 +72,8 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
   return (
  
     <main>
-       <h1>{isLoggedIn ? "True" : "False"}</h1>
+       {/* <h1>{isLoggedIn ? "True" : "False"}</h1>
+      {isLoggedIn ? ( */}
       {isLoggedIn ? (
         // Show user info if user state is set
         <>
@@ -77,8 +81,6 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
             <h2>Welcome, {user.name}</h2>
   
             <p>Your User ID: {user.id}</p>
-  
-            <button onClick={handleLogout}>Logout</button> {/* Logout button */}
           </div>
         </>
       ) : (
@@ -112,4 +114,5 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
     </main>
   );
 }
-export default WithAuthentication(Login);
+
+export default Login;

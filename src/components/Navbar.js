@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "./../resources/navbar.scss"
 import { Routes, Route, Link} from 'react-router-dom';
 import ProjectData from "./AllProject";
+import ReportOptions from "./ReportOptions";
 import ToDo from "./ToDo";
 import About from "./About";
 import Login from "./Login";
 import Contact from './Contact'
+import PeopleOptions from './PeopleOptions'
 import { useAuth } from "../resources/AuthContext";
 
 function Navbar() {
@@ -29,32 +31,38 @@ function Navbar() {
                     </button>
                 </ul>
                 <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
-                    {!isLoggedIn ? <li><Link to="/">Home</Link></li> : ''}
-                    <li>
-                        <Link to="/about">About</Link>
-                    </li>
                     {isLoggedIn && (
                         <>
-                            <li>
-                                <Link to="/contact">Contact</Link>
-                            </li>
                             <li>
                                 <Link to="/projects">Projects</Link>
                             </li>
                             <li>
-                                <Link to="/todo">To do</Link>
+                                <Link to="/reports">Reports</Link>
                             </li>
                             <li>
-                                <button onClick={logout}>Logout</button>
+                                <Link to="/people">People</Link>
                             </li>
                         </>
+                    )}
+                    {!isLoggedIn ? <li><Link to="/">Home</Link></li> : ''}
+                    <li>
+                        <Link to="/about">About</Link>
+                    </li>
+                    <li>
+                        <Link to="/contact">Contact</Link>
+                    </li>
+                    {isLoggedIn && (
+                        <li>
+                            <button onClick={logout}>Logout</button>
+                        </li>
                     )}
                 </ul>
             </nav>
             <Routes>
                 <Route path="/" exact element={<Login />} />
-                <Route path="/todo" element={<ToDo />} />
+                <Route path="/people" element={<PeopleOptions />} />
                 <Route path="/projects" element={<ProjectData />} />
+                <Route path="/reports" element={<ReportOptions />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
             </Routes>

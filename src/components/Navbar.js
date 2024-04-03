@@ -5,6 +5,7 @@ import ProjectData from "./AllProject";
 import ToDo from "./ToDo";
 import About from "./About";
 import Login from "./Login";
+import Contact from './Contact'
 import { useAuth } from "../resources/AuthContext";
 
 function Navbar() {
@@ -28,9 +29,7 @@ function Navbar() {
                     </button>
                 </ul>
                 <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
+                    {!isLoggedIn ? <li><Link to="/">Home</Link></li> : ''}
                     <li>
                         <Link to="/about">About</Link>
                     </li>
@@ -57,6 +56,7 @@ function Navbar() {
                 <Route path="/todo" element={<ToDo />} />
                 <Route path="/projects" element={<ProjectData />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
             </Routes>
         </>
     )

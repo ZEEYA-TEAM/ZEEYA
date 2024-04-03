@@ -1,15 +1,16 @@
 import React from "react";
-import Login from './components/Login';
+import { AuthProvider } from "./resources/AuthContext";
+import Navbar from "./components/Navbar";
 
 
 function App() {
 
   return (
-    <>        
-      <div className="page">      
-        <Login />
+    <AuthProvider>        
+      <div className="page">
+        <Navbar />
       </div>
-    </>
+    </AuthProvider>
   );
 }
 

@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import "./../resources/navbar.scss"
-import { BrowserRouter as Router, Routes, Route, NavLink} from 'react-router-dom'; // Import Routes
+import { Routes, Route, Link} from 'react-router-dom';
 import ProjectData from "./AllProject";
 import ToDo from "./ToDo";
+import About from "./About";
+import Login from "./Login";
+import { useAuth } from "../resources/AuthContext";
 
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { isLoggedIn, login, logout } = useAuth();
+
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -13,8 +18,6 @@ function Navbar() {
 
     return (
         <>
-        <Router>
-            <div>
             <nav>
                 <ul className="navbar-brand">
                     <li><strong>ZEEYA TEAM</strong></li>
@@ -24,36 +27,39 @@ function Navbar() {
                         &#9776;
                     </button>
                 </ul>
-                    <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
+                <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
                     <li>
-                    <NavLink to="/" activeClassName="active">Home</NavLink>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
-                    <NavLink to="/about" activeClassName="active">About</NavLink>
+                        <Link to="/about">About</Link>
                     </li>
-                    <li>
-                    <NavLink to="/contact" activeClassName="active">Contact</NavLink>
-                    </li>
-                    <li>
-                    <NavLink to="/projects" activeClassName="active">Projects</NavLink>
-                    </li>
-                    <li>
-                    <NavLink to="/todo" activeClassName="active">To do</NavLink>
-                    </li>
-                 </ul>
+                    {isLoggedIn && (
+                        <>
+                            <li>
+                                <Link to="/contact">Contact</Link>
+                            </li>
+                            <li>
+                                <Link to="/projects">Projects</Link>
+                            </li>
+                            <li>
+                                <Link to="/todo">To do</Link>
+                            </li>
+                            <li>
+                                <button onClick={logout}>Logout</button>
+                            </li>
+                        </>
+                    )}
+                </ul>
             </nav>
             <Routes>
-                {/* <Route path="/" exact element={<Home />} /> */}
+                <Route path="/" exact element={<Login />} />
                 <Route path="/todo" element={<ToDo />} />
                 <Route path="/projects" element={<ProjectData />} />
-                
+                <Route path="/about" element={<About />} />
             </Routes>
-            </div>
-        </Router>
         </>
     )
 }
-
-
 
 export default Navbar;

@@ -1,5 +1,5 @@
-// AuthContext.js
 import React, { createContext, useState } from "react";
+import LoggingService from "../LoggingService";
 
 const AuthContext = createContext();
 
@@ -11,6 +11,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    LoggingService.logUserAction(localStorage.getItem("PrivateId"), "Logout", "AuthContext", "ok");
+
     localStorage.removeItem("UserName");
     localStorage.removeItem("PrivateId");
 

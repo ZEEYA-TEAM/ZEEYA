@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './../resources/login.scss'
 import { useAuth } from "../resources/AuthContext";
+import LoggingService from "../LoggingService";
 
 function Login() {
   const [notionname, setUsername] = useState("");
@@ -49,6 +50,7 @@ function Login() {
         setUsername("");
         setPassword("");
         console.log("Login ok", isLoggedIn);
+        LoggingService.logUserAction(user.id, "Login", "Login", "ok");
  
       } else {
         alert("Login failed");

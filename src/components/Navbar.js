@@ -3,7 +3,6 @@ import "./../resources/navbar.scss"
 import { Routes, Route, Link} from 'react-router-dom';
 import ProjectData from "./AllProject";
 import ReportOptions from "./ReportOptions";
-import ToDo from "./ToDo";
 import About from "./About";
 import Login from "./Login";
 import Contact from './Contact'
@@ -14,7 +13,6 @@ import { useAuth } from "../resources/AuthContext";
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { isLoggedIn, login, logout } = useAuth();
-
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -32,25 +30,25 @@ function Navbar() {
                     </button>
                 </ul>
                 <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
-                    {!isLoggedIn ? <li><Link to="/">Home</Link></li> : <li><Link to="/dashboard">Home</Link></li>}
+                    {!isLoggedIn ? <li><Link to="/" onClick={toggleMenu}>Home</Link></li> : <li><Link to="/dashboard" onClick={toggleMenu}>Home</Link></li>}
                     {isLoggedIn && (
                         <>
                             <li>
-                                <Link to="/projects">Projects</Link>
+                                <Link to="/projects" onClick={toggleMenu}>Projects</Link>
                             </li>
                             <li>
-                                <Link to="/reports">Reports</Link>
+                                <Link to="/reports" onClick={toggleMenu}>Reports</Link>
                             </li>
                             <li>
-                                <Link to="/people">People</Link>
+                                <Link to="/people" onClick={toggleMenu}>People</Link>
                             </li>
                         </>
                     )}
                     <li>
-                        <Link to="/about">About</Link>
+                        <Link to="/about" onClick={toggleMenu}>About</Link>
                     </li>
                     <li>
-                        <Link to="/contact">Contact</Link>
+                        <Link to="/contact" onClick={toggleMenu}>Contact</Link>
                     </li>
                     {isLoggedIn && (
                         <li>

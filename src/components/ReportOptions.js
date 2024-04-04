@@ -22,7 +22,8 @@ const ReportOptions = () => {
 
   return (
     <>
-        <label htmlFor="componentDropdown" style={{fontSize:""}}>Select from dropdown list to add people or time reports:</label>
+      <h1>Time reports</h1>
+        <label htmlFor="componentDropdown" style={{fontSize:""}}>Select an option from the dropdown for time reports:</label>
         <select id="componentDropdown" onChange={handleSelectChange}>
           <option value="">Choose..</option>
           <option value="timereports">View time reports</option>           

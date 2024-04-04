@@ -1,74 +1,78 @@
 import React, { useState, useEffect } from 'react';
 import { fetchData } from '../resources/FetchData';
 
-function ProjectWeekView() {
-  const [timereports, setTimereports] = useState(null);
-  const [people, setPeople] = useState(null);
-  const [projects, setProjects] = useState(null);
-  const [filtered, setFiltered] = useState({ results: [] });
+  function ProjectWeekView() {
+    const [timereports, setTimereports] = useState(null);
+    const [projects, setProjects] = useState(null);
+    const [filtered, setFiltered] = useState({ results: [] });
+    const [dateStart, setDateStart] = useState(null);
+    const [dateEnd, setDateEnd] = useState(null);  
 
-  async function fetchTimereports() {
-    try {
-      const timereports = await fetchData("timereports");
-      const people = await fetchData("people");
-      const projects = await fetchData("projects");
+    function handleSubmit(event) {
+        event.preventDefault();
 
-      setTimereports(timereports);
-      setPeople(people);
-      setProjects(projects);
-    } catch (error) {
-      console.error(error);
+        filterTimereports(new Date(dateStart), new Date(dateEnd));
     }
-  };
+
+    function filterTimereports(dateStart, dateEnd) {
+      const dateStartUnix = dateStart.getTime();
+      const dateEndUnix = dateEnd.getTime();
+      let filtered = {
+          results: []
+      };
+  
+      timereports.results.forEach(report => {
+          const date = new Date(report.properties.Date.date.start);
+          
+          if (date.getTime() > dateStartUnix && date.getTime() < dateEndUnix) {
+              filtered.results.push(report);
+          }
+      });
+  
+      setFiltered(filtered);
+    }
+    
+    function findReportedHours(id) {
+        let hours = 0;
+
+        filtered.results
+            .filter(project => project.properties.Project.relation[0]?.id === id)
+            .map((report) => {
+                hours += report.properties.Hours.number;
+            });
+
+        return hours;
+    };
+    
+    async function fetchTimereports() {
+        try {
+            const timereports = await fetchData("timereports");
+            const projects = await fetchData("projects");
+
+            setTimereports(timereports);
+            setProjects(projects);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
   useEffect(() => {
     fetchTimereports();
-
-    if (timereports) {
-        const start = new Date("2023-03-06");
-        const end = new Date("2025-03-06");
-
-        filterTimereports(start, end);
-    }
   }, []);
 
-  const filterTimereports = (dateStart, dateEnd) => {
-    const dateStartUnix = dateStart.getTime();
-    const dateEndUnix = dateEnd.getTime();
-    let filtered = {
-        results: []
-    };
-
-    timereports.results.forEach(report => {
-        const date = new Date(report.properties.Date.date.start);
-        
-        if (date.getTime() > dateStartUnix && date.getTime() < dateEndUnix) {
-            filtered.results.push(report);
-        }
-    });
-
-    setFiltered(filtered);
-  }
-
-  const findReportedHours = (id) => {
-    let hours = 0;
-
-    filtered.results
-        .filter(project => project.properties.Project.relation[0]?.id === id)
-        .map((report) => {
-            hours += report.properties.Hours.number;
-        });
-
-    return hours;
-  };
-
-  if (!timereports || !people || !projects) {
+  if (!timereports || !projects) {
     return <p aria-busy="true">Hämtar data</p>;
   } 
 
   return (
     <>
-      <h1>Project Week View</h1>
+      <h1>Filter Projects</h1>
+      <form className='grid' onSubmit={handleSubmit}>
+        <input type="date" name="startDate" aria-label="startDate" defaultValue={dateStart} onChange={(event) => setDateStart(event.target.value)} />
+        <input type="date" name="endDate" aria-label="endDate" defaultValue={dateEnd} onChange={(event) => setDateEnd(event.target.value)} />
+
+        <button type='submit'>Confirm</button>
+      </form>
       <div className='overflow-auto'>
         <table>
           <thead>
@@ -93,6 +97,5 @@ function ProjectWeekView() {
     </>
   );
 }
-
 
 export default ProjectWeekView;

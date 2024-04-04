@@ -8,6 +8,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = () => {
     setIsLoggedIn(true);
+
+    LoggingService.logUserAction(localStorage.getItem("PrivateId"), "Login", "AuthContext", "ok");
   };
 
   const logout = () => {

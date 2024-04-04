@@ -48,10 +48,7 @@ function Login() {
      
         login();
         setUsername("");
-        setPassword("");
-        console.log("Login ok", isLoggedIn);
-        LoggingService.logUserAction(user.id, "Login", "Login", "ok");
- 
+        setPassword(""); 
       } else {
         alert("Login failed");
       }
@@ -59,6 +56,8 @@ function Login() {
       console.error("Login error:", error);
       alert("Network error or server cannot be reached");
     }
+
+
   };
  
   const handleLogout = () => {

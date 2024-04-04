@@ -87,7 +87,7 @@ export async function sendPerson(name, role) {
     }
 };
 
-export async function sendTimereport(hours, note, date) {
+export async function sendTimereport(hours, note, date, PrivateId) {
     const payload = {
         parent: {
           type: "database_id",
@@ -131,6 +131,14 @@ export async function sendTimereport(hours, note, date) {
             date: {
               start: date
             }
+          },
+          'PrivateId': {
+            type: "rich_text",
+            rich_text: [
+              {
+                plain_text: PrivateId
+              }
+            ]
           }
         }
     };

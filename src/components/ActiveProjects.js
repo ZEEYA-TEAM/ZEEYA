@@ -3,9 +3,9 @@ import { fetchData } from '../resources/FetchData';
 
 const FilterProjects = () => {
   const [data, setData] = useState(null);
+  const [statusAll] = useState(["Active", "Next Up", "Done"]);
   const [filteredData, setFilteredData] = useState(null);
   const [filter, setFilter] = useState('');
-  const [allProjectStatuses, setAllProjectStatuses] = useState([]);
 
   async function fetchProjects() {
     try {
@@ -23,8 +23,6 @@ const FilterProjects = () => {
 
   useEffect(() => {
     if (data) {
-      const statuses = data.results.map(page => page.properties.Status.select.name);
-      setAllProjectStatuses(statuses);
       setFilteredData(filterData(data, filter));
     }
   }, [data, filter]);
@@ -53,12 +51,12 @@ const FilterProjects = () => {
 
   return (
     <>
-      <h1>Projects</h1>      
+      <h1>Status</h1>      
       <div>
         <label htmlFor="status">Select from dropdown list to see project status:</label>
         <select id="status" value={filter} onChange={handleChangeFilter}>
           <option value="">Choose status</option>
-          {allProjectStatuses.map((status, index) => (
+          {statusAll.map((status, index) => (
             <option key={index} value={status}>{status}</option>
           ))}
         </select>

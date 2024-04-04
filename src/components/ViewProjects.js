@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchData } from '../resources/FetchData';
+import './../resources/projects.scss';
 
 function ViewProjects() {
   const [data, setData] = useState(null);
@@ -73,10 +74,27 @@ function ViewProjects() {
           <tbody>
             {data.results.map((page, index) => {
               // Rendera en rad i tabellen för varje objekt i 'data.results'.
+              let statusColor;
+
+              switch (page.properties.Status.select.color) { 
+                case "blue":
+                  statusColor = "#3C71F7"   
+                  break; 
+                case "brown":
+                  statusColor = "#7F270B"  
+                  break;  
+                case "pink":
+                  statusColor = "#D92662"   
+                  break; 
+                default:
+                  statusColor = "#000";
+                  break;
+              }
+
               return (
                 <tr key={index}>
                   <td>{page.properties.Projectname.title[0]?.plain_text ?? 'Ingen titel'}</td>
-                  <td>{page.properties.Status.select.name ?? 'Ingen status'}</td>
+                  <td><span className='status-color' style={{ backgroundColor: statusColor }}>{page.properties.Status.select.name ?? 'Ingen status'}</span></td>
                   <td>{page.properties.Hours.number ?? 0}</td>
                   <td>{page.properties.Worked_hours.rollup.number ?? 0}</td>
                   <td>{page.properties.Hours_left.formula.number ?? 0}</td>

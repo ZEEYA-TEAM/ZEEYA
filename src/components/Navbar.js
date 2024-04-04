@@ -7,7 +7,8 @@ import ToDo from "./ToDo";
 import About from "./About";
 import Login from "./Login";
 import Contact from './Contact'
-import PeopleOptions from './PeopleOptions'
+import PeopleOptions from './PeopleOptions';
+import Dashboard from './Dashboard';
 import { useAuth } from "../resources/AuthContext";
 
 function Navbar() {
@@ -31,6 +32,7 @@ function Navbar() {
                     </button>
                 </ul>
                 <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
+                    {!isLoggedIn ? <li><Link to="/">Home</Link></li> : <li><Link to="/dashboard">Home</Link></li>}
                     {isLoggedIn && (
                         <>
                             <li>
@@ -44,7 +46,6 @@ function Navbar() {
                             </li>
                         </>
                     )}
-                    {!isLoggedIn ? <li><Link to="/">Home</Link></li> : ''}
                     <li>
                         <Link to="/about">About</Link>
                     </li>
@@ -60,6 +61,7 @@ function Navbar() {
             </nav>
             <Routes>
                 <Route path="/" exact element={<Login />} />
+                <Route path="/dashboard" exact element={<Dashboard />} />
                 <Route path="/people" element={<PeopleOptions />} />
                 <Route path="/projects" element={<ProjectData />} />
                 <Route path="/reports" element={<ReportOptions />} />

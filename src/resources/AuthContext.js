@@ -1,10 +1,22 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import LoggingService from "../LoggingService";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const privateId = localStorage.getItem("PrivateId");
+      if (privateId) {
+        setIsLoggedIn(true);
+      }
+    };
+    checkLoginStatus();
+  }, []);
 
   const login = () => {
     setIsLoggedIn(true);
@@ -19,6 +31,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("PrivateId");
 
     setIsLoggedIn(false);
+
+    navigate('/');
   };
 
   return (

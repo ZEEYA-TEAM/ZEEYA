@@ -45,7 +45,7 @@ function UpdateProject() {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        PageId:
+        Project:
         <select value={pageId} onChange={(e) => setPageId(e.target.value)}>
           <option value="">Choose project</option>
           {projects.results.map((page, index) => (

@@ -39,7 +39,7 @@ function Timereports() {
   };
 
   const findPerson = (id) => {
-    return people.results.find(person => person.id === id).properties.Name.title[0]?.plain_text;
+    return people.results.find(person => person.properties.PrivateId.rich_text[0]?.plain_text === id).properties.Name.title[0]?.plain_text;
   };
 
   const findProject = (id) => {
@@ -70,7 +70,7 @@ function Timereports() {
               return (
                 <tr key={index}>
                   <td>{formatDate(page.properties.Date?.date)}</td>
-                  <td>{findPerson(page.properties.Person.relation[0]?.id) ?? 'No title'}</td>
+                  <td>{findPerson(page.properties.PrivateId.rich_text[0]?.plain_text) ?? 'No title'}</td>
                   <td>{page.properties.Hours.number ?? 0}</td>
                   <td>{findProject(page.properties.Project.relation[0]?.id)}</td>
                   <td>{page.properties.Note.title[0]?.text.content ?? <i>None</i>}</td>

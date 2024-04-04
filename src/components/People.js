@@ -30,6 +30,7 @@ function People() {
             <tr>
               <th>Name</th>
               <th>Total hours</th>
+              <th>Role</th>
             </tr>
           </thead>
           <tbody>
@@ -39,6 +40,7 @@ function People() {
                 <tr key={index}>
                   <td>{page.properties.Name.title[0]?.plain_text ?? 'Ingen titel'}</td>
                   <td>{page.properties.Total_hours.rollup.array[0]?.number ?? 0}</td>
+                  <td>{page.properties.Role.rich_text[0]?.plain_text ?? 0}</td>
                 </tr>
               );
             })}

@@ -5,8 +5,9 @@ import LoggingService from "../LoggingService";
 function AddProject() {
   const [projectName, setProjectName] = useState("");
   const [hours, setHours] = useState("");
-  const [status, setStatus] = useState("");
-  const [statusColor, setStatusColor] = useState("");
+  const [statusAll] = useState(["Active", "Next Up", "Done"]);
+  const [statusColorAll] = useState({"Active": "blue", "Next Up": "brown", "Done": "pink"});
+  const [status, setStatus] = useState(null);
   const [dateStart, setDateStart] = useState("");
   const [dateEnd, setDateEnd] = useState("");  
 
@@ -16,7 +17,7 @@ function AddProject() {
         projectName: projectName, 
         hours: hours, 
         status: status,
-        statusColor: statusColor,
+        statusColor: statusColorAll[status],
         dateStart: dateStart,
         dateEnd: dateEnd
     };
@@ -28,7 +29,6 @@ function AddProject() {
       setProjectName("");
       setHours("");
       setStatus("");
-      setStatusColor("");
       setDateStart("");
       setDateEnd("")
     } catch (error) {
@@ -58,19 +58,12 @@ function AddProject() {
       </label>
       <label>
         Status:
-        <input
-          type="select"
-          value={status}
-          onChange={(event) => setStatus(event.target.value)}
-        />
-      </label>
-      <label>
-        StatusColor:
-        <input
-          type="select"
-          value={statusColor}
-          onChange={(event) => setStatusColor(event.target.value)}
-        />
+        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          <option value="">Choose status</option>
+          {statusAll.map((index) => (
+            <option key={index} value={index}>{index}</option>
+          ))}
+        </select>
       </label>
       <label>
         DateStart:

@@ -58,7 +58,6 @@ function ViewProjects() {
 
   return (
     <>
-      <h1>Projects</h1>
       <div className='overflow-auto'>
         <table>
           <thead>

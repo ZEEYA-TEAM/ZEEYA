@@ -3,6 +3,7 @@ import ViewProjects from './ViewProjects';
 import FilterProjects from './ActiveProjects';
 import UpdateProject from './UpdateProject';
 import AddProject from './AddProject';
+import ProjectWeekView from './ProjectWeekView';
 
 const ProjectData = () => {
   const [userChoice, setuserChoice] = useState(null);
@@ -21,6 +22,8 @@ const ProjectData = () => {
         return <AddProject/>;       
       case 'updateproject':
         return <UpdateProject />
+      case 'projectWeekView':
+        return <ProjectWeekView />
       default:
         return null;
     }
@@ -34,6 +37,7 @@ const ProjectData = () => {
           <option value="">Choose..</option>
           <option value="projects">All Projects</option>
           <option value="filterprojects">Status project</option>         
+          <option value="projectWeekView">Filter Projects</option>         
           <option value="addprojects">Add Projects</option>        
           <option value="updateproject">Update Project</option>
         </select>

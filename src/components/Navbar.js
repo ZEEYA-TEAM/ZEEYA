@@ -18,6 +18,11 @@ function Navbar() {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    const handleLogout = () => {
+        toggleMenu();
+        logout();
+    }
+
     return (
         <>
             <nav>
@@ -52,7 +57,7 @@ function Navbar() {
                     </li>
                     {isLoggedIn && (
                         <li>
-                            <button onClick={logout}>Logout</button>
+                            <button onClick={handleLogout}>Logout</button>
                         </li>
                     )}
                 </ul>

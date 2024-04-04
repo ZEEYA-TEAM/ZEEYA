@@ -11,11 +11,12 @@ function AddTimeReport() {
     const newTimeReport = { 
         hours: hours, 
         note: note,        
-        date: date,      
+        date: date,     
+        PrivateId: localStorage.getItem("PrivateId")
     };
 
     try {
-      await sendTimereport(newTimeReport.hours, newTimeReport.note, newTimeReport.date);
+      await sendTimereport(newTimeReport.hours, newTimeReport.note, newTimeReport.date, newTimeReport.PrivateId);
       alert("Data sparad");
       console.log("Data sparad i Notion:", newTimeReport);      
       setHours("");

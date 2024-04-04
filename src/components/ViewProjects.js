@@ -4,6 +4,11 @@ import './../resources/projects.scss';
 
 function ViewProjects() {
   const [data, setData] = useState(null);
+  const [isOpen, setIsOpen] = useState(true);
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   async function fetchProjects() {
     try {
@@ -57,8 +62,42 @@ function ViewProjects() {
     return <p aria-busy="true">Hämtar data</p>;
   }
 
+  const projectsCloseToDeadline = data.results.filter(page => page.properties.Hours_left.formula.number < 7);
+
   return (
     <>
+     {isOpen && (
+        <dialog open>
+          <article>
+            <header>
+              <button aria-label="Close" rel="prev" onClick={closeModal} />
+              <p>
+                <strong>🗓️Projects Close to Deadline:</strong>
+              </p>
+            </header>
+            <table>
+              <thead>
+                <tr>
+                  <th>Projectname</th>
+                  <th>Status</th>
+                  <th>Hours left</th>
+                  <th>Timespan</th>
+                </tr>
+              </thead>
+              <tbody>
+                {projectsCloseToDeadline.map((page, index) => (
+                  <tr key={index}>
+                    <td>{page.properties.Projectname.title[0]?.plain_text ?? 'Ingen titel'}</td>
+                    <td>{page.properties.Status.select.name ?? 'Ingen status'}</td>
+                    <td>{page.properties.Hours_left.formula.number ?? 0}</td>
+                    <td>{formatTimespan(page.properties.Timespan?.date)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </article>
+        </dialog>
+      )}
       <div className='overflow-auto'>
         <table>
           <thead>

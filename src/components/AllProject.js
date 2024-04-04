@@ -28,7 +28,8 @@ const ProjectData = () => {
 
   return (
     <>
-        <label htmlFor="componentDropdown" style={{fontSize:""}}>Select from dropdown list to see project's data:</label>
+        <h1>Projects</h1>
+        <label htmlFor="componentDropdown" style={{fontSize:""}}>Select an option from the dropdown for projects:</label>
         <select id="componentDropdown" onChange={handleSelectChange}>
           <option value="">Choose..</option>
           <option value="projects">All Projects</option>

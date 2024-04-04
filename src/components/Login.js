@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import './../resources/login.scss'
 import { useAuth } from "../resources/AuthContext";
 import LoggingService from "../LoggingService";
@@ -8,12 +9,14 @@ function Login() {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
   const { isLoggedIn, login, logout } = useAuth();
+  const navigate = useNavigate();
 
 
   useEffect(() => {
     if (isLoggedIn) {
       // Redirect or perform action when user is already logged in
       console.log("User is already logged in");
+      navigate('/dashboard');
 
       const userName = localStorage.getItem("UserName");
       const userId = localStorage.getItem("PrivateId");
@@ -73,45 +76,32 @@ function Login() {
   return (
  
     <main>
-       {/* <h1>{isLoggedIn ? "True" : "False"}</h1>
-      {isLoggedIn ? ( */}
-      {isLoggedIn ? (
-        // Show user info if user state is set
-        <>
-          <div>
-            <h2>Welcome, {user.name}</h2>
-  
-            <p>Your User ID: {user.id}</p>
-          </div>
-        </>
-      ) : (
-        <>
-          {/* Otherwise, show the login form */}
-          <form className="login-form" onSubmit={handleLogin}>
-            <input
-              type="text"
-              name="login"
-              placeholder="Username"
-              aria-label="Login"
-              autoComplete="username"
-              required
-              value={notionname}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              type="password"
-              name="login"
-              placeholder="Password"
-              aria-label="Login"
-              autoComplete="username"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit">Login</button>
-          </form>
-        </>
-      )}
+      <>
+        {/* Otherwise, show the login form */}
+        <form className="login-form" onSubmit={handleLogin}>
+          <input
+            type="text"
+            name="login"
+            placeholder="Username"
+            aria-label="Login"
+            autoComplete="username"
+            required
+            value={notionname}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            name="login"
+            placeholder="Password"
+            aria-label="Login"
+            autoComplete="username"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit">Login</button>
+        </form>
+      </>
     </main>
   );
 }

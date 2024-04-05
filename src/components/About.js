@@ -2,10 +2,28 @@ import React from 'react';
 
 const About = () => {
   return (
-    <>
-        <h1>About Us</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </>
+    <div className="container mt-5">
+      <div className="border border-primary rounded p-3">
+        <h1 className="text-primary">About Us</h1>
+        <p>
+          We are five students collaborating to develop a web application as part of our courses in project management and web development. Our goal is to create a user-friendly and functional web application by applying agile methods and working efficiently together.
+        </p>
+        <h2>Group Members:</h2>
+        <ul>
+          <li>Alexander Doja</li>
+          <li>Yarub</li>
+          <li>Efrem Ghebre</li>
+          <li>Zia Nourozi</li>
+          <li>Erik</li>
+        </ul>
+        <h2>Project Goals:</h2>
+        <ul>
+          <li>Create a user-friendly web application.</li>
+          <li>Utilize agile methods for effective work.</li>
+          <li>Enhance our skills in web development through collaboration.</li>
+        </ul>
+      </div>
+    </div>
   );
 };
 

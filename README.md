@@ -8,6 +8,12 @@ I components mappen finns komponenter som är sidinnehåll. I resources finns hj
 
 Appen fungerar så att den är wrappad i en AuthProvider komponent som är till för att göra några state-variabler tillgängliga över hela appen. 
 
+# Scrum board
+
+Jag kunde inte göra länken publik, skriv till mig (Alexander) på teams så bjuder jag in dig.
+
+https://app.asana.com/0/1206692694433644/1206692708517032
+
 # Kom igång
 
 För att installera node dependencies kör:
